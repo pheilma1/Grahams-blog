@@ -92,6 +92,7 @@ class User(UserMixin, db.Model):
     #
     # posts: Mapped[List["BlogPost"]] = relationship("BlogPost", back_populates="author")
     # comments: Mapped[List["Comment"]] = relationship("Comment", back_populates="comment_author")
+
 class BlogPost(db.Model):
     __tablename__ = "blog_posts"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -151,7 +152,7 @@ def register():
 
         new_user = User(
             email=request.form['email'],
-            name=request .form['name'],
+            name=request.form['name'],
             password=generate_password_hash(request.form['password'], method='pbkdf2:sha256', salt_length=8)
         )
         print(f"{request.form['email']}, {request.form['name']}, {request.form['password']}")
